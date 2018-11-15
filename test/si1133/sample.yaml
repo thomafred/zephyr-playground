@@ -1,0 +1,12 @@
+sample:
+  description: SI1133 driver test
+    application
+  name: si1133_test
+  platforms: all
+common:
+    tags: introduction
+    harness: console
+    harness_config:
+      type: one_line
+      regex:
+        - "si1133"
