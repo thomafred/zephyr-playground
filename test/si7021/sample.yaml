@@ -1,0 +1,12 @@
+sample:
+  description: SI7021 driver test
+    application
+  name: si7021_test
+  platforms: all
+common:
+    tags: introduction
+    harness: console
+    harness_config:
+      type: one_line
+      regex:
+        - "si7021"
