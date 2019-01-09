@@ -1,0 +1,16 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.1.0
+  hooks:
+  - id: trailing-whitespace
+  - id: end-of-file-fixer
+  - id: check-json
+  - id: check-added-large-files
+  - id: check-yaml
+  - id: requirements-txt-fixer
+- repo: https://github.com/jorisroovers/gitlint
+  rev: v0.10.0
+  hooks:
+  - id: gitlint
+    stages:
+    - commit-msg

@@ -106,6 +106,24 @@
 				}
             },
 			"problemMatcher": "$msCompile"
+		},
+		{
+            "label": "Check Patch",
+            "group":"build",
+            "command": "bash",
+            "args": [
+                "-c",
+                "source ${ENV_SCRIPT} && (git diff --cached | ${ZEPHYR_BASE}/scripts/checkpatch.pl -)"
+            ],
+            "options": {
+				"cwd": "${workspaceFolder}/zephyr",
+				"env": {
+					"ZEPHYR_TOOLCHAIN_VARIANT": "gnuarmemb",
+					"GNUARMEMB_TOOLCHAIN_PATH": "/opt/gcc-arm-none-eabi/latest",
+					"ENV_SCRIPT": "../zephyr/zephyr-env.sh"
+				}
+            },
+			"problemMatcher": "$msCompile"
 		}
-    ]
+	]
 }
