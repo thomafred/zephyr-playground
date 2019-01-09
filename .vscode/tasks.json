@@ -1,0 +1,111 @@
+{
+	"version": "2.0.0",
+	"options": {
+		"shell": {}
+	},
+    "tasks": [
+		{
+			"label": "Configure",
+			"group": "build",
+			"command": "bash",
+			"args": [
+				"-c",
+				"source ${ENV_SCRIPT} && cmake -GNinja -DBOARD=efr32mg_sltb004a -DCMAKE_EXPORT_COMPILE_COMMANDS=YES -DCONF_FILE=prj.conf ../test/si1133"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/build",
+				"env": {
+					"ZEPHYR_TOOLCHAIN_VARIANT": "gnuarmemb",
+					"GNUARMEMB_TOOLCHAIN_PATH": "/opt/gcc-arm-none-eabi/latest",
+					"ENV_SCRIPT": "../zephyr/zephyr-env.sh"
+				}
+			},
+			"problemMatcher": "$msCompile"
+		},
+        {
+            "label": "Build",
+            "group": "build",
+            "command": "bash",
+            "args": [
+                "-c",
+                "source ${ENV_SCRIPT} && ninja"
+            ],
+			"options": {
+				"cwd": "${workspaceFolder}/build",
+				"env": {
+					"ZEPHYR_TOOLCHAIN_VARIANT": "gnuarmemb",
+					"GNUARMEMB_TOOLCHAIN_PATH": "/opt/gcc-arm-none-eabi/latest",
+					"ENV_SCRIPT": "../zephyr/zephyr-env.sh"
+				}
+			},
+            "problemMatcher": [
+                {
+                    "owner": "cpp",
+                    "fileLocation": "absolute",
+                    "pattern": {
+                        "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "severity": 4,
+                        "message": 5
+                    }
+                }
+            ]
+        },
+        {
+            "label": "Clean",
+            "group":"build",
+            "command": "bash",
+            "args": [
+                "-c",
+                "source ${ENV_SCRIPT} && ninja clean"
+            ],
+            "options": {
+				"cwd": "${workspaceFolder}/build",
+				"env": {
+					"ZEPHYR_TOOLCHAIN_VARIANT": "gnuarmemb",
+					"GNUARMEMB_TOOLCHAIN_PATH": "/opt/gcc-arm-none-eabi/latest",
+					"ENV_SCRIPT": "../zephyr/zephyr-env.sh"
+				}
+            },
+			"problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Pristine",
+            "group":"build",
+            "command": "bash",
+            "args": [
+                "-c",
+                "source ${ENV_SCRIPT} && ninja pristine"
+            ],
+            "options": {
+				"cwd": "${workspaceFolder}/build",
+				"env": {
+					"ZEPHYR_TOOLCHAIN_VARIANT": "gnuarmemb",
+					"GNUARMEMB_TOOLCHAIN_PATH": "/opt/gcc-arm-none-eabi/latest",
+					"ENV_SCRIPT": "../zephyr/zephyr-env.sh"
+				}
+            },
+			"problemMatcher": "$msCompile"
+		},
+		{
+            "label": "Santiy Check",
+            "group":"build",
+            "command": "bash",
+            "args": [
+                "-c",
+                "source ${ENV_SCRIPT} && ../zephyr/scripts/sanitycheck"
+            ],
+            "options": {
+				"cwd": "${workspaceFolder}/build",
+				"env": {
+					"ZEPHYR_TOOLCHAIN_VARIANT": "gnuarmemb",
+					"GNUARMEMB_TOOLCHAIN_PATH": "/opt/gcc-arm-none-eabi/latest",
+					"ENV_SCRIPT": "../zephyr/zephyr-env.sh"
+				}
+            },
+			"problemMatcher": "$msCompile"
+		}
+    ]
+}
